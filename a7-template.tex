@@ -1,0 +1,119 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{comment}
+\excludecomment{solution}
+\includecomment{question}
+\excludecomment{ignore}
+\setlength{\parskip}{1ex}
+\def\nats {{\mathbb N}}
+\def\ints {{\mathbb Z}}
+\newcommand{\Implies}{\mbox{ IMPLIES }}
+\newcommand{\Or}{\mbox{ OR }}
+\newcommand{\And}{\mbox{ AND }}
+\newcommand{\Not}{\mbox{ NOT }}
+\newcommand{\Iff}{\mbox{ IFF }}
+\newcommand{\True}{\mbox{True}}
+\newcommand{\False}{\mbox{False}}
+\newcommand{\trees}{\mathcal{B}}
+
+\input{../formal.tex}
+
+\begin{document}
+\begin{center}
+\begin{solution}
+Solutions to
+\end{solution}
+
+{\bf \Large \bf CSC240 Winter 2021 Homework Assignment 7}\\
+\end{center}
+
+\noindent
+{\bf My name and student number:}
+
+\medskip
+
+\noindent
+{\bf The list of people with whom I discussed this homework assignment:}
+
+\medskip
+
+\begin{enumerate}
+\item
+\begin{question}
+Consider the following algorithm that searches an $m \times n$ array $A[1..m,1..n]$ of integers in which the entires of each row are sorted in nondecreasing order from left to right and the entries of each column are sorted in nondecreasing order from top to bottom.
+
+\begin{formal}
+SEARCH($A,m,n,x$)\nl
+$row \leftarrow m$\nl
+$col \leftarrow 1$\nl
+while \=$(row \geq 1)$ and $(col \leq n)$ do\nl
+\n if $x = A[row,col]$ then return(true)\nl
+if $x < A[row,col]$\nl
+then $row \leftarrow  row -1$\nl
+else $col \leftarrow  col +1$\nl
+\p return(false)
+\end{formal}
+
+Let $T(m,n)$ denote the worst case number of comparisons between $x$ and entries in
+$A$ performed by SEARCH($A,m,n,x$).
+
+Prove  matching upper and lower bounds on $T$. Do not use asymptotic notation.
+\end{question}
+
+\item
+\begin{question}
+Consider the following recursive algorithm for computing the determinant of an $n \times n$ matrix $B[1..n,1..n]$:
+
+\setcounter{linenum}{0} 
+
+\begin{formal}
+det($B,n$)\nl
+if $n =1$ then return $B[1,1]$\nl
+$d \leftarrow 0$\nl
+for $k \leftarrow 1$ to $n$ do\nl
+\n for $i \leftarrow 1$ to $n-1$ do\nl
+\n if $k > 1$ then\nl
+\n for $j \leftarrow 1$ to $k-1$ do\nl
+\n $C[i,j] \leftarrow B[i+1,j]$\nl
+\p\p if $k < n$ then\nl
+\n for $j \leftarrow k$ to $n-1$ do\nl
+\n $C[i,j] \leftarrow B[i+1,j+1]$\nl
+\p\p\p if $k$ is even\nl
+then $d \leftarrow d - B[1,k] \times$ det$(C,n-1)$\nl
+else $d \leftarrow d + B[1,k] \times$ det$(C,n-1)$\nl
+\p return $d$
+\end{formal}
+
+Let $M: \ints^+ \rightarrow \nats$ be the function such that $M(n)$ is the number of multiplications
+performed by det($B,n$) for any $n \times n$ matrix $B$.
+
+Let $A: \ints^+ \rightarrow \nats$ be the function such that $A(n)$ is the number of assignments
+performed by det($B,n$) for any $n \times n$ matrix $B$.
+\end{question}
+
+\begin{enumerate}
+\item
+\begin{question}
+Give recursive definitions for $M$ and $A$. Justify them by explaining how each part  relates to the algorithm. 
+\end{question}
+
+\item
+\begin{question}
+Prove that $n! -1 \leq M(n)  \leq 2n! - n$ for all $n \in \ints^+$.
+\end{question}
+
+\item
+\begin{question}
+Prove that  $M(n) \leq A(n)$ for all $n \in \ints^+$.
+\end{question}
+
+\item
+\begin{question}
+Prove that there exist a constant $u \in \ints^+$ and a polynomial $h(n)$
+such that $A(n)  \leq un! - h(n)$ for all $n \in \ints^+$.
+\end{question}
+\end{enumerate}
+\end{enumerate}
+\end{document}
+
